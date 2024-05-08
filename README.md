@@ -42,68 +42,43 @@ ___
 
 ## API Documentation
 ___
-List of APIs:
-- 
 
+List of Admin APIs:
+- [ADD City](#add-city)
+- [ADD Casts](#add-casts)
+- [ADD Movie](#add-movie)
+- [ADD Movie Theater](#add-movie-theater)
 
+List of Organizer APIs:
+- [ADD Movie Screen](#add-movie-screen)
+- [ADD Movie Seats](#add-movie-seats)
+- [ADD Movie Show](#add-movie-show)
+- [ADD Movie Show Screen](#add-movie-show-screen)
 
-### Login
-<div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px; margin-left: 20px;">
-Used to collect a Token for a registered User.
+List of Manager APIs:
+- [Verify Ticket](#verify-ticket)
 
-**URL** : `/api/login/`
+List of Customer APIs:
 
-**Method** : `POST`
+[//]: # (- [GET City]&#40;#get-city&#41;)
 
-**Auth required** : NO
+[//]: # (- [GET Casts]&#40;#get-casts&#41;)
 
-**Data constraints**
+[//]: # (- [GET Movie]&#40;#get-movie&#41;)
 
-```json
-{
-    "username": "[valid email address]",
-    "password": "[password in plain text]"
-}
-```
+[//]: # (- [GET Movie Theater]&#40;#get-movie-theater&#41;)
 
-**Data example**
+[//]: # (- [GET Movie Screen]&#40;#get-movie-screen&#41;)
 
-```json
-{
-    "username": "iloveauth@example.com",
-    "password": "abcd1234"
-}
-```
+[//]: # (- [GET Movie Show]&#40;#get-movie-show&#41;)
+- [Search Movies](#search-movies)
+- [Search Movie Screen](#search-movies-screen)
+- [Search Movie Seat](#search-movies-seat)
+- [Book Movie](#book-movie)
 
-### Success Response
+List of APIs for Third Party:
+- [Payment Confirmation](#payment-confirmation)
 
-**Code** : `200 OK`
-
-**Content example**
-
-```json
-{
-    "token": "93144b288eb1fdccbe46d6fc0f241a51766ecd3d"
-}
-```
-
-## Error Response
-
-**Condition** : If 'username' and 'password' combination is wrong.
-
-**Code** : `400 BAD REQUEST`
-
-**Content** :
-
-```json
-{
-    "non_field_errors": [
-        "Unable to login with provided credentials."
-    ]
-}
-```
-</div>
----
 
 # Add City
 
@@ -214,6 +189,10 @@ To add city in DB.
 
 ---
 
+# Add Casts
+
+# Get Casts
+
 # Add Movie
 
 To add movie in DB.
@@ -304,3 +283,127 @@ class MovieCategory(models.TextChoices):
 ```
 
 ---
+
+
+[//]: # (### Login)
+
+[//]: # (Used to collect a Token for a registered User.)
+
+[//]: # ()
+[//]: # (**URL** : `/api/login/`)
+
+[//]: # ()
+[//]: # (**Method** : `POST`)
+
+[//]: # ()
+[//]: # (**Auth required** : NO)
+
+[//]: # ()
+[//]: # (**Data constraints**)
+
+[//]: # ()
+[//]: # (```json)
+
+[//]: # ({)
+
+[//]: # (    "username": "[valid email address]",)
+
+[//]: # (    "password": "[password in plain text]")
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (**Data example**)
+
+[//]: # ()
+[//]: # (```json)
+
+[//]: # ({)
+
+[//]: # (    "username": "iloveauth@example.com",)
+
+[//]: # (    "password": "abcd1234")
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Success Response)
+
+[//]: # ()
+[//]: # (**Code** : `200 OK`)
+
+[//]: # ()
+[//]: # (**Content example**)
+
+[//]: # ()
+[//]: # (```json)
+
+[//]: # ({)
+
+[//]: # (    "token": "93144b288eb1fdccbe46d6fc0f241a51766ecd3d")
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Error Response)
+
+[//]: # ()
+[//]: # (**Condition** : If 'username' and 'password' combination is wrong.)
+
+[//]: # ()
+[//]: # (**Code** : `400 BAD REQUEST`)
+
+[//]: # ()
+[//]: # (**Content** :)
+
+[//]: # ()
+[//]: # (```json)
+
+[//]: # ({)
+
+[//]: # (    "non_field_errors": [)
+
+[//]: # (        "Unable to login with provided credentials.")
+
+[//]: # (    ])
+
+[//]: # (})
+
+[//]: # (```)
+
+# Get Movie
+
+# Add Movie Theater
+
+# Get Movie Theater
+
+# Add Movie Screen
+
+# Get Movie Screen
+
+# Add Movie Seats
+
+# Add Movie Show
+
+# Get Movie Show
+
+# Add Movie Show Screen
+
+# Search Movies
+
+# Search Movies Screen
+
+# Search Movies Seat
+
+# Book Movie
+
+# Verify Ticket
+
+# Payment Confirmation
+
