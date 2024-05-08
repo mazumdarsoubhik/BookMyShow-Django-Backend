@@ -140,7 +140,7 @@ class Booking(BaseModel):
     movieShowScreen = models.ForeignKey(MovieShowScreen, on_delete=models.CASCADE, related_name='bookings', default=None)
     selectedSeats = models.ManyToManyField(MovieShowSeat)
     amount = models.FloatField()
-    payment = models.ForeignKey(MovieScreen, on_delete=models.CASCADE, related_name='booking')
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, related_name='booking')
     bookingStatus = models.CharField(choices=BookingStatus.choices, max_length=50)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name='booking', default=None)
 

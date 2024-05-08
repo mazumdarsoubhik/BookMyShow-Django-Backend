@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from datetime import datetime, time
+from .enums import *
+
 
 ### Custom Serializer Fields ###
 class Custom24HRSTimeField(serializers.Field):
@@ -15,7 +17,9 @@ class Custom24HRSTimeField(serializers.Field):
 
 ###############################
 
+
 ### Data Trasfer Objects ###
+
 
 class SearchMovieInput(serializers.Serializer):
     city_id = serializers.IntegerField()
@@ -68,4 +72,15 @@ class CreateBookingDTO(serializers.Serializer):
     movie_seat_ids = serializers.ListSerializer(child=serializers.IntegerField())
 
 
+class PaymentCompletionDTO(serializers.Serializer):
+    booking_id = serializers.IntegerField()
+    payment_id = serializers.IntegerField()
+    amount = serializers.FloatField()
+    payment_mode = serializers.ChoiceField(choices=PaymentMode.choices)
+    success = serializers.BooleanField()
+
+
+class VerifyTicketDTO(serializers.Serializer):
+    ticket_id = serializers.IntegerField()
+    show_screen_id = serializers.IntegerField()
 

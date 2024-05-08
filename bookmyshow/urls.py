@@ -35,4 +35,6 @@ urlpatterns = [
     path('search/movie/screen', MovieScreeningDetails.as_view()),
     path('search/movie/screen/seats', GetMovieShowSeats.as_view()),
     path('book/movie', CreateBooking.as_view()),
+    path('payment/confirm', MakePayment.as_view()),
+    path('ticket/verify', VerifyTicket.as_view()),
 ]

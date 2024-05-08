@@ -9,7 +9,7 @@ from .serialisers import *
 from .dtos import *
 from .strategies import *
 from .services import *
-
+import pdb
 
 class Signup(APIView):
     # No Access
@@ -391,9 +391,9 @@ class GetMovieShowSeats(APIView):
 class CreateBooking(APIView):
     # User
     def post(self, request: Request):
-        booking_details = CreateBookingDTO(data=request)
+        booking_details = CreateBookingDTO(data=request.data)
         if booking_details.is_valid():
-            service_status, response_data = BookingService.execute(booking_details)
+            service_status, response_data = BookingService.execute(booking_details.data)
             if service_status:
                 return Response(response_data, 200)
             else:
@@ -403,13 +403,43 @@ class CreateBooking(APIView):
 
 
 class MakePayment(APIView):
-    pass
-
-
-class AddEditMovie(APIView):
-    pass
+    def post(self, request: Request):
+        payment_details = PaymentCompletionDTO(data=request.data)
+        if payment_details.is_valid():
+            service_status, response_data = PaymentCompletionService.execute(payment_details.data)
+            if service_status:
+                return Response(response_data, 200)
+            else:
+                return Response(response_data, 400)
+        else:
+            return Response(payment_details.errors, 400)
 
 
 class VerifyTicket(APIView):
-    pass
+    def get(self, request: Request):
+        # Manager
+        reconcile_details = VerifyTicketDTO(data=request.data)
+        if reconcile_details.is_valid():
+            ticket = get_object_or_404(Ticket, pk=reconcile_details.validated_data["ticket_id"])
+            screen = get_object_or_404(MovieShowScreen, pk=reconcile_details.validated_data["show_screen_id"])
+            booking = get_object_or_404(Booking, ticket=ticket.id)
+            ## Check if show belongs to manager ##
+
+            ## Check if ticket belongs to show screen ##
+            # pdb.set_trace()
+            if booking.movieShowScreen.id == screen.id:
+                s_ticket = TicketSerializer(ticket)
+                return Response({"valid": True,
+                                 "message": "Ticket Verified",
+                                 "data": s_ticket.data},
+                                200)
+            else:
+                return Response({"valid": False,
+                                 "message": "Invalid ticket."},
+                                200)
+        else:
+            return Response({"valid": False,
+                             "data": reconcile_details.errors},
+                            400)
+
 

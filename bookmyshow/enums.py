@@ -55,6 +55,7 @@ class BookingStatus(models.TextChoices):
 
 
 class PaymentMode(models.TextChoices):
+    NONE = ""
     UPI = "UPI"
     CREDIT = "CREDIT"
     DEBIT = "DEBIT"

@@ -1,7 +1,54 @@
-# API Documentation
+# BookMyShow Django Project
+___
+This project is made to practice low level design, algorithms and ofcourse django framework.
 
-# Login
+## Problem Statement
+___
+- An event ticket booking system to book seats for movies, theaters, and stadiums.
+- The project has to have a class diagram, schema diagram, and machine coding.
+- It has to be a backend server only for now.
+- The data has to persist in the Database.
+- The project should have API routes, not just MVC.
+- For now, no need to connect to third-party APIs, keep it a dummy functionality
 
+## Requirements
+___
+- There will be 4 user types: customer, event organizer, event manager, and admin. Each user has its own set of controls.
+- The customer can:
+    - Search for events over the app, can filter by event type (movie, theater, match)
+    - It can select an event and check its details such as type, title, casts, date, time, seat map, location, seat-wise cost, and minimum cost.
+    - Book a ticket, for multiple people, make payments, create tickets, and manage observer.
+    - Option to cancel the ticket and manage the observer.
+- The event organizer can:
+    - Create an event in the app; adding type, title, seating plan, seat-wise cost, date, time, payment account, and event managers
+- The event manager can:
+    - Verify customer in the event.
+- The admin can:
+    - Can edit or add on behalf of customers and organizers.
+- Movies and acts can have the same theater structure whereas match happens in stadiums.
+
+## Use Case Diagram
+___
+![Use case Diagram](media/BMS_usecase_diagram.jpeg)
+
+## Commands to Run
+- Make sure you have python 3.12.x and MySQL installed in your system.
+- Open terminal and clone the repository `git clone https://github.com/mazumdarsoubhik/BookMyShow-Django-Backend.git`
+- Navigate to the repository `cd BookMyShow-Django-Backend`
+- Make migrations to manage DB:
+  - `python manage.py makemigrations`
+  - `python manage.py migrate`
+- Run server `python manage.py runserver`
+
+## API Documentation
+___
+List of APIs:
+- 
+
+
+
+### Login
+<div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px; margin-left: 20px;">
 Used to collect a Token for a registered User.
 
 **URL** : `/api/login/`
@@ -28,7 +75,7 @@ Used to collect a Token for a registered User.
 }
 ```
 
-## Success Response
+### Success Response
 
 **Code** : `200 OK`
 
@@ -55,7 +102,7 @@ Used to collect a Token for a registered User.
     ]
 }
 ```
-
+</div>
 ---
 
 # Add City
