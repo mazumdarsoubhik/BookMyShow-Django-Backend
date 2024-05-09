@@ -84,7 +84,7 @@ List of APIs for Third Party:
 
 To add city in DB.
 
-**URL** : `/city/`
+**URL** : `/city`
 
 **Method** : `POST`
 
@@ -108,7 +108,7 @@ To add city in DB.
 
 ## Success Response
 
-**Code** : `200 OK`
+**Code** : `201 CREATED`
 
 **Content example**
 
@@ -135,15 +135,11 @@ To add city in DB.
 }
 ```
 
----
-
----
-
 # Get City
 
-To add city in DB.
+To get list of cities from DB.
 
-**URL** : `/city/`
+**URL** : `/city`
 
 **Method** : `GET`
 
@@ -187,17 +183,114 @@ To add city in DB.
 }
 ```
 
----
-
 # Add Casts
+
+To add cast (Actors) in DB.
+
+**URL** : `/casts`
+
+**Method** : `POST`
+
+**Auth required** : YES - Admin
+
+**Data constraints**
+
+```json
+{
+    "name": "[Name of the Cast]"
+}
+```
+
+**Data example**
+
+```json
+{
+    "name": "Sharman Joshi"
+}
+```
+
+## Success Response
+
+**Code** : `201 Created`
+
+**Content example**
+
+```json
+{
+    "id": 8,
+    "created_at": "2024-04-26T13:13:46.702809Z",
+    "modified_at": "2024-04-26T13:13:46.702809Z",
+    "name": "Sharman Joshi"
+}
+```
+
+## Error Response
+
+**Condition** : If cast already present in DB.
+
+**Code** : `201 CREATED`
+
+**Content** :
+
+```json
+{
+  "message": "Movie cast already exists"
+}
+```
 
 # Get Casts
 
+To get list of all the casts from DB.
+
+**URL** : `/casts`
+
+**Method** : `GET`
+
+**Auth required** : YES - Admin
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+[
+    {
+        "id": 1,
+        "created_at": "2024-04-23T11:21:03.992438Z",
+        "modified_at": "2024-04-23T11:21:03.992438Z",
+        "name": "Deepika Padukone"
+    },
+    {
+        "id": 2,
+        "created_at": "2024-04-23T11:21:23.626952Z",
+        "modified_at": "2024-04-23T11:21:23.627984Z",
+        "name": "Shahrukh Khan"
+    }
+    
+]
+```
+
+## Error Response
+
+**Condition** : If cast already present in DB.
+
+**Code** : `201 CREATED`
+
+**Content** :
+
+```json
+{
+  "message": "Movie cast already exists"
+}
+```
+
 # Add Movie
 
-To add movie in DB.
+To add a movie in DB.
 
-**URL** : `/movie/`
+**URL** : `/movie`
 
 **Method** : `POST`
 
@@ -242,7 +335,7 @@ class MovieCategory(models.TextChoices):
 
 ## Success Response
 
-**Code** : `200 OK`
+**Code** : `201 CREATED`
 
 **Content example**
 
@@ -282,104 +375,106 @@ class MovieCategory(models.TextChoices):
 }
 ```
 
----
-
-
-[//]: # (### Login)
-
-[//]: # (Used to collect a Token for a registered User.)
-
-[//]: # ()
-[//]: # (**URL** : `/api/login/`)
-
-[//]: # ()
-[//]: # (**Method** : `POST`)
-
-[//]: # ()
-[//]: # (**Auth required** : NO)
-
-[//]: # ()
-[//]: # (**Data constraints**)
-
-[//]: # ()
-[//]: # (```json)
-
-[//]: # ({)
-
-[//]: # (    "username": "[valid email address]",)
-
-[//]: # (    "password": "[password in plain text]")
-
-[//]: # (})
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (**Data example**)
-
-[//]: # ()
-[//]: # (```json)
-
-[//]: # ({)
-
-[//]: # (    "username": "iloveauth@example.com",)
-
-[//]: # (    "password": "abcd1234")
-
-[//]: # (})
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (### Success Response)
-
-[//]: # ()
-[//]: # (**Code** : `200 OK`)
-
-[//]: # ()
-[//]: # (**Content example**)
-
-[//]: # ()
-[//]: # (```json)
-
-[//]: # ({)
-
-[//]: # (    "token": "93144b288eb1fdccbe46d6fc0f241a51766ecd3d")
-
-[//]: # (})
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (### Error Response)
-
-[//]: # ()
-[//]: # (**Condition** : If 'username' and 'password' combination is wrong.)
-
-[//]: # ()
-[//]: # (**Code** : `400 BAD REQUEST`)
-
-[//]: # ()
-[//]: # (**Content** :)
-
-[//]: # ()
-[//]: # (```json)
-
-[//]: # ({)
-
-[//]: # (    "non_field_errors": [)
-
-[//]: # (        "Unable to login with provided credentials.")
-
-[//]: # (    ])
-
-[//]: # (})
-
-[//]: # (```)
-
 # Get Movie
 
+To get list of movies from DB.
+
+**URL** : `/movie`
+
+**Method** : `GET`
+
+**Auth required** : YES - Admin
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+[
+    {
+        "id": 2,
+        "created_at": "2024-04-26T13:15:41.149158Z",
+        "modified_at": "2024-04-26T13:15:41.149158Z",
+        "title": "3 idiots",
+        "description": "A bollywood comedy movie on education system.",
+        "release_date": "2009-12-02",
+        "rating": 9.0,
+        "movieCategory": "COMEDY",
+        "duration": 120,
+        "casts": [
+            5,
+            6,
+            7,
+            8
+        ],
+        "languages": [
+            2
+        ]
+    }
+]
+    
+]
+```
+
 # Add Movie Theater
+
+To add movie theater in DB upon registration of organizer of the theater.
+
+**URL** : `/movie/theater`
+
+**Method** : `POST`
+
+**Auth required** : YES - Admin
+
+**Data constraints**
+
+```json
+{
+    "eventType": ["Type of event"],
+    "name": ["Name of the Theater"],
+    "city": ["City ID"],
+    "organizer": ["organizer ID"]
+}
+```
+
+Event Type Enum
+```python
+class EventType(models.TextChoices):
+    CINEMA = "CINEMA"
+    ACT = "ACT"
+    STADIUM = "STADIUM"
+```
+
+**Data example**
+
+```json
+{
+    "eventType": "CINEMA",
+    "name": "PVR, Lulu Mall",
+    "city": 3,
+    "organizer": 1
+}
+```
+
+## Success Response
+
+**Code** : `201 CREATED`
+
+**Content example**
+
+```json
+{
+    "id": 1,
+    "created_at": "2024-04-23T12:30:57.788553Z",
+    "modified_at": "2024-04-23T12:30:57.788553Z",
+    "eventType": "CINEMA",
+    "name": "PVR, Park Square Mall",
+    "city": 1,
+    "organizer": 1
+}
+```
 
 # Get Movie Theater
 
