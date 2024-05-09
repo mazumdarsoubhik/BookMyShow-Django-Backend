@@ -1,9 +1,9 @@
 # BookMyShow Django Project
-___
+
 This project is made to practice low level design, algorithms and ofcourse django framework.
 
 ## Problem Statement
-___
+
 - An event ticket booking system to book seats for movies, theaters, and stadiums.
 - The project has to have a class diagram, schema diagram, and machine coding.
 - It has to be a backend server only for now.
@@ -12,7 +12,7 @@ ___
 - For now, no need to connect to third-party APIs, keep it a dummy functionality
 
 ## Requirements
-___
+
 - There will be 4 user types: customer, event organizer, event manager, and admin. Each user has its own set of controls.
 - The customer can:
     - Search for events over the app, can filter by event type (movie, theater, match)
@@ -28,7 +28,7 @@ ___
 - Movies and acts can have the same theater structure whereas match happens in stadiums.
 
 ## Use Case Diagram
-___
+
 ![Use case Diagram](media/BMS_usecase_diagram.jpeg)
 
 ## Commands to Run
@@ -41,7 +41,7 @@ ___
 - Run server `python manage.py runserver`
 
 ## API Documentation
-___
+
 
 List of Admin APIs:
 - [ADD City](#add-city)
