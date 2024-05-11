@@ -43,22 +43,22 @@ This project is made to practice low level design, algorithms and ofcourse djang
 ## API Documentation
 
 
-List of Admin APIs:
+List of **Admin** APIs:
 - [ADD City](#add-city)
 - [ADD Casts](#add-casts)
 - [ADD Movie](#add-movie)
 - [ADD Movie Theater](#add-movie-theater)
 
-List of Organizer APIs:
+List of **Organizer** APIs:
 - [ADD Movie Screen](#add-movie-screen)
 - [ADD Movie Seats](#add-movie-seats)
 - [ADD Movie Show](#add-movie-show)
 - [ADD Movie Show Screen](#add-movie-show-screen)
 
-List of Manager APIs:
+List of **Manager** APIs:
 - [Verify Ticket](#verify-ticket)
 
-List of Customer APIs:
+List of **Customer** APIs:
 
 [//]: # (- [GET City]&#40;#get-city&#41;)
 
@@ -375,48 +375,80 @@ class MovieCategory(models.TextChoices):
 }
 ```
 
-# Get Movie
+[//]: # (# Get Movie)
 
-To get list of movies from DB.
+[//]: # ()
+[//]: # (To get list of movies from DB.)
 
-**URL** : `/movie`
+[//]: # ()
+[//]: # (**URL** : `/movie`)
 
-**Method** : `GET`
+[//]: # ()
+[//]: # (**Method** : `GET`)
 
-**Auth required** : YES - Admin
+[//]: # ()
+[//]: # (**Auth required** : YES - Admin)
 
-## Success Response
+[//]: # ()
+[//]: # (## Success Response)
 
-**Code** : `200 OK`
+[//]: # ()
+[//]: # (**Code** : `200 OK`)
 
-**Content example**
+[//]: # ()
+[//]: # (**Content example**)
 
-```json
-[
-    {
-        "id": 2,
-        "created_at": "2024-04-26T13:15:41.149158Z",
-        "modified_at": "2024-04-26T13:15:41.149158Z",
-        "title": "3 idiots",
-        "description": "A bollywood comedy movie on education system.",
-        "release_date": "2009-12-02",
-        "rating": 9.0,
-        "movieCategory": "COMEDY",
-        "duration": 120,
-        "casts": [
-            5,
-            6,
-            7,
-            8
-        ],
-        "languages": [
-            2
-        ]
-    }
-]
-    
-]
-```
+[//]: # ()
+[//]: # (```json)
+
+[//]: # ([)
+
+[//]: # (    {)
+
+[//]: # (        "id": 2,)
+
+[//]: # (        "created_at": "2024-04-26T13:15:41.149158Z",)
+
+[//]: # (        "modified_at": "2024-04-26T13:15:41.149158Z",)
+
+[//]: # (        "title": "3 idiots",)
+
+[//]: # (        "description": "A bollywood comedy movie on education system.",)
+
+[//]: # (        "release_date": "2009-12-02",)
+
+[//]: # (        "rating": 9.0,)
+
+[//]: # (        "movieCategory": "COMEDY",)
+
+[//]: # (        "duration": 120,)
+
+[//]: # (        "casts": [)
+
+[//]: # (            5,)
+
+[//]: # (            6,)
+
+[//]: # (            7,)
+
+[//]: # (            8)
+
+[//]: # (        ],)
+
+[//]: # (        "languages": [)
+
+[//]: # (            2)
+
+[//]: # (        ])
+
+[//]: # (    })
+
+[//]: # (])
+
+[//]: # (    )
+[//]: # (])
+
+[//]: # (```)
 
 # Add Movie Theater
 
@@ -476,17 +508,120 @@ class EventType(models.TextChoices):
 }
 ```
 
-# Get Movie Theater
+[//]: # (# Get Movie Theater)
 
 # Add Movie Screen
 
-# Get Movie Screen
+To add movie screen to movie theater in DB.
+
+**URL** : `/movie/screen`
+
+**Method** : `POST`
+
+**Auth required** : YES - Admin
+
+**Data constraints**
+
+```json
+{
+    "number": ["Screen Number in the theater"],
+    "movieTheater": ["Movie Theater ID"],
+    "screenType": ["Screen Type Enum"]
+}
+```
+
+ScreenType Enum
+```python
+class SeatType(models.TextChoices):
+    PLATINUM = "PLATINUM"
+    GOLD = "GOLD"
+    SILVER = "SILVER"
+```
+
+**Data example**
+
+```json
+{
+    "number": 1,
+    "movieTheater": 2,
+    "screenType": "3D"
+}
+```
+
+## Success Response
+
+**Code** : `201 CREATED`
+
+**Content example**
+
+```json
+{
+    "id": 10,
+    "created_at": "2024-04-22T13:00:01.588654Z",
+    "modified_at": "2024-04-22T13:00:01.588654Z",
+    "number": 1,
+    "movieTheater": 2,
+    "screenType": "3D"
+}
+```
+
+## Error Response
+
+**Condition** : If bad request.
+
+**Code** : `400 Bad Request`
 
 # Add Movie Seats
 
-# Add Movie Show
+To add movie seat to movie screen in DB.
 
-# Get Movie Show
+**URL** : `/movie/seat`
+
+**Method** : `POST`
+
+**Auth required** : YES - Admin
+
+**Data constraints**
+
+```json
+{
+    "movie_screen_id": ["Movie Screen ID"],
+    "seat_list": ["List of seat pair [row, col]"],
+    "row_seat_type": ["Dict of seat type mentioning row"]
+}
+```
+
+**Data example**
+
+```json
+{
+    "movie_screen_id": 3,
+    "seat_list": [[1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [1, 8], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5], [3, 6], [3, 7], [3, 8], [4, 1], [4, 2], [4, 3], [4, 4], [4, 5], [4, 6], [4, 7], [4, 8]],
+    "row_seat_type": {
+        "PLATINUM": [3,4],
+        "GOLD": [1,2]
+        
+    }
+}
+```
+
+## Success Response
+
+**Code** : `201 CREATED`
+
+**Content example**
+
+```json
+
+```
+
+## Error Response
+
+**Condition** : If bad request.
+
+**Code** : `400 Bad Request`
+
+# Add Movie Show
 
 # Add Movie Show Screen
 
